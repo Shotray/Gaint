@@ -1,4 +1,4 @@
-//单项链表（模板）
+//单向链表（模板）
 
 #include<iostream>
 
@@ -25,6 +25,8 @@ template<class T>
 class List {
 //创建、插入、删除、查找、算总数
 public:
+	List() = default;
+	~List();
 	void Create();
 	void Insert();
 	void Remove();
@@ -38,6 +40,19 @@ private:
 	ListNode<T>* _first;
 	ListNode<T>* _last;
 };
+
+template<class T>
+List<T>::~List()
+{
+	ListNode<T>* p = _first;
+	while (p != NULL)
+	{
+		ListNode<T>* q = p;
+		p = p->_next;
+		delete q;
+	}
+	return;
+}
 
 template<class T>
 void List<T>::Create()

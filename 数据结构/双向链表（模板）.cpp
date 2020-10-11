@@ -1,47 +1,68 @@
-//单项链表
+//双向链表（模板）
 
 #include<iostream>
 
-class List;
+template<class T> class List;
 
+template<class T>
 class ListNode {
-	friend List;
+	friend List<T>;
 public:
 	void PrintNode();
 private:
-	int _data;
+	T _data;
+	ListNode* _prev;
 	ListNode* _next;
 };
 
-void ListNode::PrintNode()
+template<class T>
+void ListNode<T>::PrintNode()
 {
 	std::cout << this->_data << std::endl;
 	return;
 }
 
+template<class T>
 class List {
 	//创建、插入、删除、查找、算总数
 public:
+	List() = default;
+	~List();
 	void Create();
 	void Insert();
 	void Remove();
 
-	ListNode* Search(int i);//用重载[]
+	ListNode<T>* Search(int i);//用重载[]
 	int operator[](const int i);
 
 	int Size();
 	void Print();
 private:
-	ListNode* _first;
-	ListNode* _last;
+	ListNode<T>* _first;
+	ListNode<T>* _last;
 };
 
-void List::Create()
+template<class T>
+List<T>::~List()
+{
+	ListNode<T>* p = _first;
+	while (p != NULL)
+	{
+		ListNode<T>* q = p;
+		p = p->_next;
+		delete q;
+	}
+	return;
+}
+
+template<class T>
+void List<T>::Create()
 {
 	int data;
-	ListNode* p = new ListNode;
+	ListNode<T>* p = new ListNode<T>;
 	_first = p;
 	_first->_data = 0;
+	_first->_prev = NULL;
 	std::cout << "请输入数据，按-1结束输入:";
 	std::cin >> data;
 	while (std::cin.good())
@@ -50,8 +71,9 @@ void List::Create()
 		{
 			break;
 		}
-		ListNode* q = new ListNode;
+		ListNode<T>* q = new ListNode<T>;
 		p->_next = q;
+		q->_prev = p;
 		q->_data = data;
 		p = q;
 		std::cout << "请输入数据，按-1结束输入:";
@@ -62,10 +84,10 @@ void List::Create()
 	return;
 }
 
-
-void List::Insert()
+template<class T>
+void List<T>::Insert()
 {
-	ListNode* p = new ListNode;
+	ListNode<T>* p = new ListNode<T>;
 	int i;
 	int data;
 	std::cout << "请输入要插入的数据：";
@@ -82,9 +104,11 @@ void List::Insert()
 	//存在两种方法判断插入是否是首位/末位
 	//1、通过i和count结果来判断
 	//2、末尾通过NULL来判断，首位不需要改变，有一个first指针
-	ListNode* previous;
+	ListNode<T>* previous;
 	previous = this->Search(i - 1);
+	previous->_next->_prev = p;
 	p->_next = previous->_next;
+	p->_prev = previous;
 	previous->_next = p;
 
 	//方法一
@@ -99,26 +123,31 @@ void List::Insert()
 	return;
 }
 
-void List::Remove()
+template<class T>
+void List<T>::Remove()
 {
 	int i;
 	std::cout << "请输入想要删除的位置：";
 	std::cin >> i;
 
-	ListNode* q = this->Search(i);
-	ListNode* previous = this->Search(i - 1);
+	ListNode<T>* q = this->Search(i);
+	ListNode<T>* previous = this->Search(i - 1);
 	previous->_next = q->_next;
+	q->_next->_prev = previous;
+
 	if (q->_next == NULL)
 	{
 		_last = previous;
 	}
+	
 	delete q;
 	return;
 }
 
-ListNode* List::Search(int i)
+template<class T>
+ListNode<T>* List<T>::Search(int i)
 {
-	ListNode* p;
+	ListNode<T>* p;
 	//小bug 用户查找0的时候可以查找到我的空链表头
 	if (i < 0 || i > this->Size())
 	{
@@ -132,9 +161,10 @@ ListNode* List::Search(int i)
 	return p;
 }
 
-int List::operator[](const int pos)
+template<class T>
+int List<T>::operator[](const int pos)
 {
-	ListNode* p;
+	ListNode<T>* p;
 	//小bug 用户查找0的时候可以查找到我的空链表头
 	if (pos < 0 || pos > this->Size())
 	{
@@ -148,9 +178,10 @@ int List::operator[](const int pos)
 	return p->_data;
 }
 
-int List::Size()
+template<class T>
+int List<T>::Size()
 {
-	ListNode* p;
+	ListNode<T>* p;
 	p = _first->_next;
 	int count = 0;
 	while (p != NULL)
@@ -161,9 +192,10 @@ int List::Size()
 	return count;
 }
 
-void List::Print()
+template<class T>
+void List<T>::Print()
 {
-	ListNode* p;
+	ListNode<T>* p;
 	p = _first->_next;
 	while (p != NULL)
 	{
@@ -175,9 +207,9 @@ void List::Print()
 
 int main(void)
 {
-	List li;
+	List<int> li;
 	int i;
-	ListNode* p;
+	ListNode<int>* p;
 	li.Create();
 	std::cout << "共有" << li.Size() << "个数据,";
 	std::cout << "请输入想要查询的数据：";
