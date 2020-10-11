@@ -20,13 +20,16 @@ void ListNode::PrintNode()
 }
 
 class List {
-//创建、插入、删除、查找、算总数
+	//创建、插入、删除、查找、算总数
 public:
 	void Create();
 	void Insert();
-	void Delete();
-	ListNode* Search(int i);
-	int Count();
+	void Remove();
+
+	ListNode* Search(int i);//用重载[]
+	int operator[](const int i);
+
+	int Size();
 	void Print();
 private:
 	ListNode* _first;
@@ -62,7 +65,7 @@ void List::Create()
 
 void List::Insert()
 {
-	ListNode* p=new ListNode;
+	ListNode* p = new ListNode;
 	int i;
 	int data;
 	std::cout << "请输入要插入的数据：";
@@ -71,8 +74,8 @@ void List::Insert()
 	std::cout << "请输入要插入的位置：";
 	std::cin >> i;
 
-	int length = this->Count();
-	if (i <= 0 || i > length+1)
+	int length = this->Size();
+	if (i <= 0 || i > length + 1)
 	{
 		std::cerr << "输入过大/过小，无法查找";
 	}
@@ -96,14 +99,14 @@ void List::Insert()
 	return;
 }
 
-void List::Delete()
+void List::Remove()
 {
 	int i;
 	std::cout << "请输入想要删除的位置：";
 	std::cin >> i;
 
 	ListNode* q = this->Search(i);
-	ListNode* previous = this->Search(i-1);
+	ListNode* previous = this->Search(i - 1);
 	previous->_next = q->_next;
 	if (q->_next == NULL)
 	{
@@ -117,7 +120,7 @@ ListNode* List::Search(int i)
 {
 	ListNode* p;
 	//小bug 用户查找0的时候可以查找到我的空链表头
-	if (i < 0 || i > this->Count())
+	if (i < 0 || i > this->Size())
 	{
 		std::cerr << "输入过大/过小，无法查询" << std::endl;
 	}
@@ -129,7 +132,23 @@ ListNode* List::Search(int i)
 	return p;
 }
 
-int List::Count()
+int List::operator[](const int pos)
+{
+	ListNode* p;
+	//小bug 用户查找0的时候可以查找到我的空链表头
+	if (pos < 0 || pos > this->Size())
+	{
+		std::cerr << "输入过大/过小，无法查询" << std::endl;
+	}
+	p = _first;
+	for (int j = 1; j <= pos; j++)
+	{
+		p = p->_next;
+	}
+	return p->_data;
+}
+
+int List::Size()
 {
 	ListNode* p;
 	p = _first->_next;
@@ -160,13 +179,14 @@ int main(void)
 	int i;
 	ListNode* p;
 	li.Create();
-	std::cout << "共有" << li.Count() << "个数据,";
+	std::cout << "共有" << li.Size() << "个数据,";
 	std::cout << "请输入想要查询的数据：";
 	std::cin >> i;
+	std::cout << li[i];
 	p = li.Search(i);
 	p->PrintNode();
 	li.Insert();
-	li.Delete();
+	li.Remove();
 	li.Print();
 	return 0;
 }
