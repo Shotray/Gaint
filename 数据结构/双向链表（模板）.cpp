@@ -106,7 +106,8 @@ void List<T>::Insert()
 	//2、末尾通过NULL来判断，首位不需要改变，有一个first指针
 	ListNode<T>* previous;
 	previous = this->Search(i - 1);
-	previous->_next->_prev = p;
+	if(previous->_next!=NULL)
+		previous->_next->_prev = p;
 	p->_next = previous->_next;
 	p->_prev = previous;
 	previous->_next = p;
