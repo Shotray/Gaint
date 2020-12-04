@@ -6,7 +6,7 @@ template<class type> class List;
 template<class type>
 class ListNode {
   friend List<type>;
-  ListNode() :_data(0), _prev(NULL), _next(NULL) {}
+  ListNode() : _prev(NULL), _next(NULL) {}
   ListNode(type data) :_data(data), _prev(NULL), _next(NULL) {}
 private:
   type _data;
