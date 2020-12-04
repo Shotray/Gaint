@@ -27,6 +27,7 @@ public:
   int size() { return _size; }
   void remove(int pos);
   void pop();
+  void pop_front();
   class Iter;
   Iter begin();
   Iter end();
@@ -194,9 +195,13 @@ void List<type>::pop()
   delete node;
 }
 
-int main(void) {
-  List<int>li;
-  li.push_back(3);
-  li.pop();
-  return 0;
+template<class type>
+void List<type>::pop_front(){
+  if(empty())
+    throw std::out_of_range("The list is empty");
+  ListNode<type>* node=_first->_next;
+  _first->_next=node->_next;
+  node->_next->_prev=_first;
+  delete node;
+  _size--;
 }
