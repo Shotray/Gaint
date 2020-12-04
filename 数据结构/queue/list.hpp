@@ -177,7 +177,8 @@ void List<type>::remove(int data) {
   }
   else {
     node->_prev->_next = node->_next;
-    node->_next->_prev = node->_prev;
+    if(node->_next!=NULL)
+      node->_next->_prev = node->_prev;
     delete node;
   }
   _size--;
@@ -201,7 +202,8 @@ void List<type>::pop_front(){
     throw std::out_of_range("The list is empty");
   ListNode<type>* node=_first->_next;
   _first->_next=node->_next;
-  node->_next->_prev=_first;
+  if(node->_next!=NULL)
+    node->_next->_prev=_first;
   delete node;
   _size--;
 }

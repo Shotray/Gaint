@@ -177,7 +177,8 @@ void List<type>::remove(int data) {
   }
   else {
     node->_prev->_next = node->_next;
-    node->_next->_prev = node->_prev;
+    if(node->_next!=NULL)
+      node->_next->_prev = node->_prev;
     delete node;
   }
   _size--;

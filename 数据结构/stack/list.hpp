@@ -176,7 +176,8 @@ void List<type>::remove(int data) {
   }
   else {
     node->_prev->_next = node->_next;
-    node->_next->_prev = node->_prev;
+    if(node->_next!=NULL)
+      node->_next->_prev = node->_prev;
     delete node;
   }
   _size--;
@@ -194,9 +195,4 @@ void List<type>::pop()
   delete node;
 }
 
-int main(void) {
-  List<int>li;
-  li.push_back(3);
-  li.pop();
-  return 0;
-}
+#include"stack.cpp"
