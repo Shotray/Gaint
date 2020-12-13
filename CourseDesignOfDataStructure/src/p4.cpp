@@ -428,23 +428,47 @@ double calculate(string s) {
   return result.top();
 }
 
+bool check(string s){
+  for(int i=0;i<s.size();i++){
+    if(s[i]>='0'&&s[i]<='9')
+      continue;
+    switch(s[i]){
+      case '%':
+      case '^':
+      case '+':
+      case '-':
+      case '*':
+      case '/':
+      case '(':
+      case ')':
+      case '=':
+      case '.':
+        continue;
+      default:return false;
+    }
+  }
+  return true;
+}
+
 void solve() {
-  while (true) {
-    string s;
-    cout << "Please input the arithemetic expression." << endl;
+  string s;
+  while(true){
+    cout << "Please input the arithemetic expression."<<endl;
     cin >> s;
+    if(!check(s)) 
+      throw invalid_argument("Wrong input!");
     cout << "The answer is:";
     cout << calculate(s) << endl;
-    cout << "Do you want to continue?(Press y for yes and n for no)";
+    cout<<"continue?(y,n):";
     char judge;
-    cin >> judge;
-    if (judge == 'n')
-      break;
+    cin>> judge;
+    if(judge=='n') return;
   }
   return;
 }
 
 int main(void) {
   solve();
+  system("pause");
   return 0;
 }

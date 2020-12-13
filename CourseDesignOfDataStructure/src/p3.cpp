@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 #include<iomanip>
+#include<stdexcept>
 using namespace std;
 
 const int kSize = 8;
@@ -68,10 +69,10 @@ void Maze::SetFixedMaze() {
 
 void Maze::SetMaze() {
   int col, row;
-  std::cout << "请输入迷宫的行数和列数（小于10）" << std::endl;
-  std::cout << "行数：";
+  std::cout << "Please enter the number of rows and columns of maze" << std::endl;
+  std::cout << "Number of lines:";
   std::cin >> _row;
-  std::cout << "列数：";
+  std::cout << "Number of columns:";
   std::cin >> _col;
   for (int i = 0; i < _row; i++) {
     vector<char> a;
@@ -90,13 +91,13 @@ void Maze::SetMaze() {
 }
 
 void Maze::SetEntrance() {
-  std::cout << "请输入入口坐标（如坐标为（1，1）则输入1 1）：";
+  std::cout << "Please enter the entry coordinate (if the coordinate is (1,1), then enter 1,1)";
   std::cin >> _extrance_row >> _extrance_col;
   _answer.push_back({_extrance_row, _extrance_col});
 }
 
 void Maze::SetExit() {
-  std::cout << "请输入出口坐标（如坐标为（1，1）则输入1 1）：";
+  std::cout << "Please enter the exit coordinate (if the coordinate is (1,1), then enter 1,1)";
   std::cin >> _exit_row >> _exit_col;
 }
 
@@ -120,14 +121,14 @@ void Maze::Dfs(int x, int y) {
 }
 
 void Maze::PrintMaze() {
-  cout << "迷宫地图：" << endl;
+  cout << "Maze map:" << endl;
   cout << "   ";
   for (int j = 0; j < _maze.size(); j++) {
-    cout << setw(6) << setiosflags(ios::right) << j << "列";
+    cout << setw(6) << setiosflags(ios::right)  << "column "<< j;
   }
   cout << endl;
   for (int i = 0; i < _maze.size(); i++) {
-    cout << i << "行";
+    cout  << "row "<< i;
     for (int j = 0; j < _maze[i].size(); j++) {
       cout << setw(8) <<setiosflags(ios::right)<< _maze[i][j];
     }
@@ -137,7 +138,7 @@ void Maze::PrintMaze() {
 }
 
 void Maze::PrintAnswer() {
-  cout << "迷宫路径：" << endl;
+  cout << "Maze path:" << endl;
   for (int i = 0; i < _all_paths.size(); i++) {
     for (int j = 0; j < _all_paths[i].size(); j++) {
       cout << '<' <<_all_paths[i][j][0] << ',' << _all_paths[i][j][1] << '>';
@@ -150,12 +151,22 @@ void Maze::PrintAnswer() {
 
 void Solve() {
   Maze maze;
+  
+  std::cout<<"Manual input labyrinth(enter A) or fixed labyrinth(enter B):";
+  
+  char judge;
+  std::cin>>judge;
+  if(judge == 'A') {
   //手动输入迷宫
   maze.SetMaze();
   maze.SetEntrance();
   maze.SetExit();
+  }
+  else if(judge=='B'){
   //固定迷宫
   maze.SetFixedMaze();
+  }
+  else throw invalid_argument("Wrong Input");
 
   maze.PrintMaze();
 
@@ -167,4 +178,6 @@ void Solve() {
 
 int main(void) { 
   Solve();
-  return 0; }
+  system("pause");
+  return 0; 
+}

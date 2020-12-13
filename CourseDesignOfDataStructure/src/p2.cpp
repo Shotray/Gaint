@@ -1,4 +1,5 @@
 #include<iostream>
+#include<stdexcept>
 
 class List;
 
@@ -6,10 +7,21 @@ class ListNode {
 	friend List;
 public:
 	ListNode() :_data(0), _next(NULL) {}
+	void del();
 private:
 	int _data;
+	ListNode* _prev;
 	ListNode* _next;
 };
+
+void ListNode::del() {
+	ListNode* q=this->_prev;
+	q->_next=this->_next;
+	if(this->_next){
+		this->_next->_prev=q;
+	}
+	delete this;
+}
 
 class List {
 public:
@@ -18,6 +30,7 @@ public:
 	void Creat();
 	bool Search(int data);
 	void PushBack(int data);
+	
 	ListNode* GetFirst() { return _first; }
 	List* Compare(List* li);
 	void Print();
@@ -30,6 +43,7 @@ List::List()
 {
 	_first = new ListNode;
 	_first->_data = 0;
+	_first->_prev = NULL;
 	_first->_next = NULL;
 	_last = _first;
 }
@@ -56,9 +70,12 @@ void List::Creat()
 		ListNode* q = new ListNode;
 		q->_data = data;
 		p->_next = q;
+		q->_prev = p;
 		p = q;
 		std::cin >> data;
 	}
+	if(!std::cin.good())
+		throw std::invalid_argument("Wrong Input!");
 	p->_next = NULL;
 	_last = p;
 	return;
@@ -85,8 +102,10 @@ bool List::Search(int data)
 	}
 	if (p != NULL)
 	{
-		if (p->_data == data)
+		if (p->_data == data){
+			p->del();
 			return true;
+		}
 	}
 	return false;
 }
@@ -125,9 +144,13 @@ int main(void)
 {
 	List li1;
 	List li2;
+	std::cout<<"Please enter the first list(end with -1):";
 	li1.Creat();
+	std::cout<<"Please enter the second list(end with -1):";
 	li2.Creat();
 	List* p = li1.Compare(&li2);
+	std::cout<<"The intersection of two linked lists is:";
 	p->Print();
+	system("pause");
 	return 0;
 }

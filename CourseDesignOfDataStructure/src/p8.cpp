@@ -152,7 +152,7 @@ void solve() {
     }
     else if (op == 'B') {
       while (true) {
-        cout << "Please input two vertices and edge:";
+        cout << "Please input two vertices and edge(end with ? ? 0 ):";
         Edge e;
         cin >> e.from >> e.to >> e.distance;
         if (e.from == "?" && e.to == "?" && e.distance == 0)
@@ -195,5 +195,6 @@ void solve() {
 
 int main(void) {
   solve();
+  system("pause");
   return 0;
 }

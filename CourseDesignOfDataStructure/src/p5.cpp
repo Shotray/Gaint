@@ -250,9 +250,10 @@ vector<int> BussinessProcess(vector<int> customer) {
 
 void print(vector<int> ans) {
   cout << "The order is:";
-  for (int i = 0;i < ans.size();i++) {
+  for (int i = 0;i < ans.size()-1;i++) {
     cout << ans[i] << " ";
   }
+  cout<<ans[ans.size()-1];
   return;
 }
 
@@ -276,5 +277,6 @@ void Solve() {
 int main(void)
 {
   Solve();
+  system("pause");
   return 0;
 }

@@ -115,17 +115,22 @@ void solve() {
   cout << "Please input n which means how many pieces do we need:";
   int n;
   cin >> n;
+  if(cin.fail()) 
+    throw invalid_argument("Wrong Input");
   cout << "Please input the lengths of pieces:";
   SortedList<int> pieces;
   for (int i = 0;i < n;i++) {
     int temp;
     cin >> temp;
+    if(cin.fail()) 
+      throw invalid_argument("Wrong input!");
     pieces.push(temp);
   }
-  cout << calculateMinCost(pieces);
+  cout <<"The total cost is:"<< calculateMinCost(pieces);
 }
 
 int main(void) {
   solve();
+  system("pause");
   return 0;
 }

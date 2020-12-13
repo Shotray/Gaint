@@ -79,7 +79,6 @@ void del_child_tree(Tree*node_parent,Tree* node){
 
 //插入孩子
 void insert(Tree* node,string name){
-    
     Tree* newnode=new Tree;
     newnode->_name=name;
     if(!node->_left){
@@ -161,6 +160,7 @@ void solve(){
             cin>>name;
             Tree* node_parent=find_parent(root,name);
             Tree* node=find(root,name);
+            cout<<"The person whose family will be destroyed is:"<<node->_name<<endl;
             print(node);
             del_child_tree(node_parent,node);
         }
@@ -168,9 +168,11 @@ void solve(){
             cout<<"Please enter the name which you want to change his name:";
             cin>>name;
             Tree* node=find(root,name);
+            string n=node->_name;
             cout<<"Please enter changed name:";
             cin>>name;
             modify(node,name);
+            cout<<n<<" has changed to "<<name<<endl;
         }
         else if(action=='E'){
             del(root);
@@ -184,5 +186,6 @@ void solve(){
 
 int main(void){
     solve();
+    system("pause");
     return 0;
 }
