@@ -3,7 +3,7 @@
 
 using namespace std;
 
-#define NULL 0
+
 #include<stdexcept>
 
 template<class type> class List;

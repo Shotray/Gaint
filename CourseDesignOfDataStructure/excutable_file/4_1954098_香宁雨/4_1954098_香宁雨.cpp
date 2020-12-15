@@ -4,7 +4,6 @@
 #include<cmath>
 using namespace std;
 
-#define NULL 0
 #include<stdexcept>
 #include<string>
 
@@ -399,6 +398,7 @@ double run(double left, double right, char op) {
   }
   if (op == '%')return (int)left % (int)right;
   if (op == '^')return pow((int)left, (int)right);
+  return -1;
 }
 
 double calculate(string s) {
