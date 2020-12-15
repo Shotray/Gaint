@@ -47,7 +47,7 @@ void bubbleSort(vector<T>&arr){
 	QueryPerformanceCounter(&time_over);	//计时结束
 	double run_time=1000000*(time_over.QuadPart-time_start.QuadPart)/dqFreq;
 	//乘以1000000把单位由秒化为微秒，精度为1000 000/（cpu主频）微秒
-	printf("\nBubbleSort run_time：%fus\n",run_time);
+	printf("\nBubbleSort run_time:%fus\n",run_time);
 
     cout<<"Exchange "<<count<<" times in bubbleSort."<<endl;
 }
@@ -107,7 +107,7 @@ void insertSort(vector<T>&arr){
     QueryPerformanceCounter(&time_over);	//计时结束
 	double run_time=1000000*(time_over.QuadPart-time_start.QuadPart)/dqFreq;
 	//乘以1000000把单位由秒化为微秒，精度为1000 000/（cpu主频）微秒
-	printf("\ninsertSort run_time：%fus\n",run_time);
+	printf("\ninsertSort run_time:%fus\n",run_time);
 
     cout<<"Exchange "<<count<<" times in insertSort."<<endl;
 }
@@ -139,7 +139,7 @@ void selectSort(vector<T>&arr){
     QueryPerformanceCounter(&time_over);	//计时结束
 	double run_time=1000000*(time_over.QuadPart-time_start.QuadPart)/dqFreq;
 	//乘以1000000把单位由秒化为微秒，精度为1000 000/（cpu主频）微秒
-	printf("\nselectSort run_time：%fus\n",run_time);
+	printf("\nselectSort run_time:%fus\n",run_time);
 
     cout<<"Exchange "<<count<<" times in selectSort."<<endl;
 }
@@ -174,7 +174,7 @@ void shellSort(vector<T>&arr) {
     QueryPerformanceCounter(&time_over);	//计时结束
 	double run_time=1000000*(time_over.QuadPart-time_start.QuadPart)/dqFreq;
 	//乘以1000000把单位由秒化为微秒，精度为1000 000/（cpu主频）微秒
-	printf("\nBubbleSort run_time：%fus\n",run_time);
+	printf("\nBubbleSort run_time:%fus\n",run_time);
 
     cout<<"Exchange "<<count<<" times in shellSort."<<endl;
 
@@ -226,7 +226,7 @@ void mergeSort(vector<T>&arr) {
     QueryPerformanceCounter(&time_over);	//计时结束
 	double run_time=1000000*(time_over.QuadPart-time_start.QuadPart)/dqFreq;
 	//乘以1000000把单位由秒化为微秒，精度为1000 000/（cpu主频）微秒
-	printf("\nmergeSort run_time：%fus\n",run_time);
+	printf("\nmergeSort run_time:%fus\n",run_time);
 
     cout<<"Exchange "<<mergeCount<<" times in mergeSort."<<endl;
 
@@ -263,7 +263,7 @@ void bucketSort(vector<T>&arr){
     QueryPerformanceCounter(&time_over);	//计时结束
 	double run_time=1000000*(time_over.QuadPart-time_start.QuadPart)/dqFreq;
 	//乘以1000000把单位由秒化为微秒，精度为1000 000/（cpu主频）微秒
-	printf("\nbucketSort run_time：%fus\n",run_time);
+	printf("\nbucketSort run_time:%fus\n",run_time);
 
     cout<<"Exchange "<<count<<" times in bucketSort."<<endl;
 
@@ -320,7 +320,7 @@ void heapSort(vector<T>&arr) {
     QueryPerformanceCounter(&time_over);	//计时结束
 	double run_time=1000000*(time_over.QuadPart-time_start.QuadPart)/dqFreq;
 	//乘以1000000把单位由秒化为微秒，精度为1000 000/（cpu主频）微秒
-	printf("\nheapSort run_time：%fus\n",run_time);
+	printf("\nheapSort run_time:%fus\n",run_time);
 
     cout<<"Exchange "<<heapCount<<" times in heapSort."<<endl;
 }
@@ -374,7 +374,7 @@ void solve(){
     QueryPerformanceCounter(&time_over);	//计时结束
 	double run_time=1000000*(time_over.QuadPart-time_start.QuadPart)/dqFreq;
 	//乘以1000000把单位由秒化为微秒，精度为1000 000/（cpu主频）微秒
-	printf("\nquickSort run_time：%fus\n",run_time);
+	printf("\nquickSort run_time:%fus\n",run_time);
 
     cout<<"Exchange "<<qs_count<<" times in quickSort."<<endl;
 
