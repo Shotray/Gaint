@@ -12,4 +12,16 @@ void floyd(vector<vector<int>>& dis){
 }
 
 int main(void) {
+    for(int i=0;i<n;i++){
+        for(int j=0;i<n;j++){
+            if(dis[i][j]>dis[i][0]+dis[0][j])
+                dis[i][j]=dis[i][0]+dis[0][j];
+        }
+    }
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            if(dis[i][j]>dis[i][1]+dis[1][j])
+                dis[i][j]=dis[i][1]+dis[1][j];
+        }
+    }
 }

@@ -4,10 +4,13 @@ using namespace std;
 
 #define INF 2147483647
 
+while(1) for each edge(u,v) relax(u,v);
+
 struct Edge {
   int u, v;
   int w;
 };
+
 
 void BellmanFord(vector<int> dis) {
   int n = dis.size();
